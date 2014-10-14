@@ -1,3 +1,5 @@
+require "stack"
+
 class UndefinedVariableError < StandardError; end
 
 class Expression

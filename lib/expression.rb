@@ -53,13 +53,16 @@ class Expression
   # @return [Expression] Returns a possibly-simplified Expression
 
   def evaluate(bindings = {})
-    p "#{bindings}"
 
     stack = Stack.new
 
     tokens.each do |token|
       if numeric?(token)
         stack.push(token.to_i)
+      elsif variable?(token) && bindings[token.to_sym]
+        stack.push(bindings[token.to_sym])
+      elsif variable?(token) && !bindings[token.to_sym]
+        puts "Undefined Variable #{token}"
       elsif operator?(token)
         args = []
 
@@ -80,6 +83,10 @@ class Expression
 
   def tokens
     @expr.split(" ")
+  end
+
+  def variable?(token)
+    token =~ /[a-z]+/
   end
 
   def numeric?(token)

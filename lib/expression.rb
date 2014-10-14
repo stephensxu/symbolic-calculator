@@ -15,6 +15,7 @@ end
 SYMBOL_TABLE = {
   "+" => lambda { |stack, x, y| x + y },
   "-" => lambda { |stack, x, y| x - y },
+  "*" => lambda { |stack, x, y| x * y },
   "!" => lambda { |stack, n| factorial(n) },
   "%" => lambda { |stack, n| x % y },
   "if" => lambda { |stack, x, y, z| x == 0 ? y : z },

@@ -62,21 +62,23 @@ class Expression
       elsif variable?(token) && bindings[token.to_sym]
         stack.push(bindings[token.to_sym])
       elsif variable?(token) && !bindings[token.to_sym]
-        puts "Undefined Variable #{token}"
+        stack.push(token)
+        # puts "Undefined Variable #{token}"
       elsif operator?(token)
-        args = []
+        stack.push(token)
+        # args = []
 
-        (SYMBOL_TABLE[token].arity - 1).times do
-          args.unshift(stack.pop)
-        end
+        # (SYMBOL_TABLE[token].arity - 1).times do
+        #   args.unshift(stack.pop)
+        # end
 
-        stack.push(call_operator(stack, token, *args))
+        # stack.push(call_operator(stack, token, *args))
       else
         stack.push(token)
       end
     end
 
-    stack.pop
+    p stack
   end
 
   private

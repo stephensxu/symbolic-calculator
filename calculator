@@ -12,6 +12,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 #
 
 require "expression"
+require "binary_tree"
 
 bindings = {}
 

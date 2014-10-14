@@ -50,8 +50,46 @@ class Expression
   #
   # @param bindings [Hash] a map of variable names to concrete values
   # @return [Expression] Returns a possibly-simplified Expression
+
   def evaluate(bindings = {})
     p "#{bindings}"
-    "Implement Expression#evaluate in #{__FILE__}"
+
+    stack = Stack.new
+
+    tokens.each do |token|
+      if numeric?(token)
+        stack.push(token.to_i)
+      elsif operator?(token)
+        args = []
+
+        (SYMBOL_TABLE[token].arity - 1).times do
+          args.unshift(stack.pop)
+        end
+
+        stack.push(call_operator(stack, token, *args))
+      else
+        stack.push(token)
+      end
+    end
+
+    stack.pop
+  end
+
+  private
+
+  def tokens
+    @expr.split(" ")
+  end
+
+  def numeric?(token)
+    token =~ /^-?\d+$/
+  end
+
+  def operator?(token)
+    SYMBOL_TABLE.key?(token)
+  end
+
+  def call_operator(stack, operator, *args)
+    SYMBOL_TABLE[operator].call(stack, *args)
   end
 end

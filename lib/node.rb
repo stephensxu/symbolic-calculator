@@ -133,14 +133,3 @@ class MultiplicationNode < OperandNode
     end
   end
 end
-
-
-
-
-
-
-
-
-
-
-

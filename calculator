@@ -28,9 +28,11 @@ loop do
     bindings[$1.to_sym] = $2.to_i
   else
     begin
+      p "initiating expression"
       puts Expression.new(input).evaluate(bindings)
-    rescue StandardError
+    rescue StandardError => error
       puts "Error evaluating RPN expression: #{input.inspect}"
+      puts error
     end
   end
 end

@@ -1,2 +1,3 @@
+* You are only calling simplify once; what ended up in the stack, is it one big tree?
+* How are we building that tree?
 * How does line 27 ~ 28 work in calculator?
-* How to create binary tree from the stack?

@@ -12,6 +12,7 @@ class Node
   end
 
   def self.operator?(token)
+    p "checking if this is an operator"
     operators.key?(token)
   end
 
@@ -113,6 +114,7 @@ class MultiplicationNode < OperandNode
   end
 
   def simplify
+    p "starting to simplify MultiplicationNode"
     lhs = left.simplify
     rhs = right.simplify
 

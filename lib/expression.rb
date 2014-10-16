@@ -14,10 +14,11 @@ class Expression
 
     tokens.each do |token|
       if Node.operator?(token)
+        p stack
         rhs = stack.pop
         lhs = stack.pop
+        p "finished popping"
         stack.push(Node.load(token, lhs, rhs))
-
       elsif bindings.key?(token)
         stack.push(Node.load(bindings[token]))
       else

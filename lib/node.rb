@@ -12,7 +12,6 @@ class Node
   end
 
   def self.operator?(token)
-    p "checking if this is an operator"
     operators.key?(token)
   end
 
@@ -108,7 +107,7 @@ class SubtractionNode < OperatorNode
   end
 end
 
-class MultiplicationNode < OperandNode
+class MultiplicationNode < OperatorNode
   def to_s
     "(#{self.left.to_s} * #{self.right.to_s})"
   end
@@ -118,7 +117,7 @@ class MultiplicationNode < OperandNode
     lhs = left.simplify
     rhs = right.simplify
 
-    if lhs.isa?(NumericNode) && rhs.is_a?(NumericNode)
+    if lhs.is_a?(NumericNode) && rhs.is_a?(NumericNode)
       NumericNode.new(lhs.value * rhs.value)
     elsif lhs.is_a?(NumericNode) && lhs.value == 0
       NumericNode.new(0)

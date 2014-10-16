@@ -10,14 +10,13 @@ class Expression
   end
 
   def evaluate(bindings = {})
+    puts "bindings is #{bindings.inspect}"
     stack = Stack.new
 
     tokens.each do |token|
       if Node.operator?(token)
-        p stack
         rhs = stack.pop
         lhs = stack.pop
-        p "finished popping"
         stack.push(Node.load(token, lhs, rhs))
       elsif bindings.key?(token)
         stack.push(Node.load(bindings[token]))
@@ -25,7 +24,6 @@ class Expression
         stack.push(Node.load(token))
       end
     end
-    p stack
     stack.pop.simplify
   end
 

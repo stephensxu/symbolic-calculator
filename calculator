@@ -25,14 +25,14 @@ loop do
     exit
   # e.g., lines that look like x = 20
   when /^([a-z]+)\s*=\s*(-*\d+)$/
-    bindings[$1.to_sym] = $2.to_i
+    bindings[$1] = $2
   else
-    begin
+    # begin
       p "initiating expression"
       puts Expression.new(input).evaluate(bindings)
-    rescue StandardError => error
-      puts "Error evaluating RPN expression: #{input.inspect}"
-      puts error
-    end
+    # rescue StandardError => error
+    #   puts "Error evaluating RPN expression: #{input.inspect}"
+    #   puts error
+    # end
   end
 end

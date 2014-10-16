@@ -1,9 +1,12 @@
 class Stack
+  class UnderFlowError < StandardError; end
+
   def initialize
     @stack = []
   end
 
   def pop
+    raise UnderFlowError, "Stack is empty" if empty?
     @stack.pop
   end
 
@@ -12,6 +15,6 @@ class Stack
   end
 
   def peek
-    @stack[-1]
+    @stack.last
   end
 end
